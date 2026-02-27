@@ -121,6 +121,7 @@ export default function HomePage() {
     keywords: normalizedKeywords,
     url: "https://lokmatbharat.com/",
     image: "https://lokmatbharat.com/assets/images/social.jpg",
+    ampUrl: "https://lokmatbharat.com/amp"
   });
 
   return (

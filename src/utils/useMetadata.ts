@@ -8,6 +8,7 @@ interface MetadataProps {
   keywords?: string;
   image?: string;
   url?: string;
+  ampUrl?: string;
 }
 
 export function useMetadata({
@@ -16,6 +17,7 @@ export function useMetadata({
   keywords,
   image,
   url,
+  ampUrl
 }: MetadataProps) {
   useEffect(() => {
     if (typeof window === "undefined" || !document) return;
@@ -176,6 +178,17 @@ export function useMetadata({
       }
       canonical.setAttribute("href", url);
     }
-  }, [title, description, keywords, image, url]);
+
+    // Update AMP URL if available
+    if (ampUrl) {
+      let ampLink = document.querySelector('link[rel="amphtml"]');
+      if (!ampLink) {
+        ampLink = document.createElement("link");
+        ampLink.setAttribute("rel", "amphtml");
+        document.head.appendChild(ampLink);
+      }
+      ampLink.setAttribute("href", ampUrl);
+    }
+  }, [title, description, keywords, image, url, ampUrl]);
 }
 
